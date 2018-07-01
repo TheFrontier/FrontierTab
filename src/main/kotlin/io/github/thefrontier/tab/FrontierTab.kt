@@ -6,7 +6,6 @@ import ninja.leaping.configurate.loader.ConfigurationLoader
 import org.slf4j.Logger
 import org.spongepowered.api.command.CommandResult
 import org.spongepowered.api.command.CommandSource
-import org.spongepowered.api.command.args.CommandElement
 import org.spongepowered.api.command.args.GenericArguments
 import org.spongepowered.api.command.spec.CommandSpec
 import org.spongepowered.api.config.DefaultConfig
@@ -18,16 +17,13 @@ import org.spongepowered.api.plugin.Plugin
 import org.spongepowered.api.scheduler.Task
 import org.spongepowered.api.service.permission.PermissionService
 import org.spongepowered.api.service.permission.Subject
-import org.spongepowered.api.text.Text
 import pw.dotdash.solace.guava.typeToken
 import pw.dotdash.solace.java.unwrapped
 import pw.dotdash.solace.sponge.asset.asset
+import pw.dotdash.solace.sponge.command.args.optional
 import pw.dotdash.solace.sponge.command.registerCommand
 import pw.dotdash.solace.sponge.event.registerListeners
-import pw.dotdash.solace.sponge.text.darkGreen
-import pw.dotdash.solace.sponge.text.fromAmpersand
-import pw.dotdash.solace.sponge.text.green
-import pw.dotdash.solace.sponge.text.text
+import pw.dotdash.solace.sponge.text.*
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.concurrent.TimeUnit
@@ -105,7 +101,7 @@ class FrontierTab @Inject constructor(
                 }
                 .permission("frontier.tab.user.format")
                 .arguments(GenericArguments.user("user".text),
-                        !GenericArguments.remainingJoinedStrings("format".text))
+                        GenericArguments.remainingJoinedStrings("format".text).optional)
                 .build()
 
         val userHeader = CommandSpec.builder()
@@ -117,7 +113,7 @@ class FrontierTab @Inject constructor(
                 }
                 .permission("frontier.tab.user.header")
                 .arguments(GenericArguments.user("user".text),
-                        !GenericArguments.remainingJoinedStrings("header".text))
+                        GenericArguments.remainingJoinedStrings("header".text).optional)
                 .build()
 
         val userFooter = CommandSpec.builder()
@@ -129,7 +125,7 @@ class FrontierTab @Inject constructor(
                 }
                 .permission("frontier.tab.user.footer")
                 .arguments(GenericArguments.user("user".text),
-                        !GenericArguments.remainingJoinedStrings("footer".text))
+                        GenericArguments.remainingJoinedStrings("footer".text).optional)
                 .build()
 
         val user = CommandSpec.builder()
@@ -148,7 +144,7 @@ class FrontierTab @Inject constructor(
                 }
                 .permission("frontier.tab.group.format")
                 .arguments(SubjectCommandElement("group".text, PermissionService.SUBJECTS_GROUP),
-                        !GenericArguments.remainingJoinedStrings("format".text))
+                        GenericArguments.remainingJoinedStrings("format".text).optional)
                 .build()
 
         val groupHeader = CommandSpec.builder()
@@ -160,7 +156,7 @@ class FrontierTab @Inject constructor(
                 }
                 .permission("frontier.tab.group.header")
                 .arguments(SubjectCommandElement("group".text, PermissionService.SUBJECTS_GROUP),
-                        !GenericArguments.remainingJoinedStrings("header".text))
+                        GenericArguments.remainingJoinedStrings("header".text).optional)
                 .build()
 
         val groupFooter = CommandSpec.builder()
@@ -172,7 +168,7 @@ class FrontierTab @Inject constructor(
                 }
                 .permission("frontier.tab.group.footer")
                 .arguments(SubjectCommandElement("group".text, PermissionService.SUBJECTS_GROUP),
-                        !GenericArguments.remainingJoinedStrings("footer".text))
+                        GenericArguments.remainingJoinedStrings("footer".text).optional)
                 .build()
 
         val group = CommandSpec.builder()
@@ -237,7 +233,3 @@ class FrontierTab @Inject constructor(
         }
     }
 }
-
-operator fun Text.plus(other: Text): Text = Text.builder().append(this).append(other).build()
-operator fun Text.plus(other: String): Text = Text.builder().append(this).append(other.text).build()
-inline operator fun CommandElement.not(): CommandElement = GenericArguments.optional(this)
