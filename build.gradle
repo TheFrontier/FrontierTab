@@ -1,0 +1,47 @@
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.2.50"
+    id "org.jetbrains.kotlin.kapt" version "1.2.50"
+
+    id "com.github.johnrengelman.shadow" version "2.0.4"
+}
+
+group = pluginGroup
+version = pluginVersion
+
+configurations {
+    compile.extendsFrom(kapt)
+    compile.extendsFrom(shadow)
+}
+
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spongepowered.org/maven/" }
+    maven { url 'https://jitpack.io' }
+}
+
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.50"
+
+    compile 'org.spongepowered:spongeapi:7.1.0-SNAPSHOT'
+
+    compile 'com.github.xDotDash:Solace:1.3.0'
+    compile 'com.github.rojo8399:PlaceholderApi:4.4'
+}
+
+shadowJar {
+    configurations = [project.configurations.shadow]
+
+    relocate 'kotlin', 'solace.kotlin'
+
+    classifier = null
+}
+
+build.dependsOn(shadowJar)
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
