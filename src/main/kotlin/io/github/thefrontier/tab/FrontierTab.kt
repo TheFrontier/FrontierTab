@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit
         url = "https://github.com/TheFrontier/FrontierTab",
         authors = ["DotDash"],
         dependencies = [
-            Dependency(id = "solace", version = "[2.0.0,)"),
+            Dependency(id = "solace", version = "[2.1.0,)"),
             Dependency(id = "placeholderapi", version = "4.4")
         ])
 class FrontierTab @Inject constructor(
