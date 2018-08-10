@@ -17,23 +17,23 @@ import org.spongepowered.api.plugin.Plugin
 import org.spongepowered.api.scheduler.Task
 import org.spongepowered.api.service.permission.PermissionService
 import org.spongepowered.api.service.permission.Subject
-import pw.dotdash.solace.guava.typeToken
-import pw.dotdash.solace.java.unwrapped
-import pw.dotdash.solace.sponge.asset.asset
-import pw.dotdash.solace.sponge.command.args.optional
-import pw.dotdash.solace.sponge.command.registerCommand
-import pw.dotdash.solace.sponge.event.registerListeners
-import pw.dotdash.solace.sponge.text.*
+import solace.guava.typeToken
+import solace.java.util.unwrapped
+import solace.sponge.asset.asset
+import solace.sponge.command.args.optional
+import solace.sponge.command.registerCommand
+import solace.sponge.event.registerListeners
+import solace.sponge.text.*
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.concurrent.TimeUnit
 
-@Plugin(id = "frontier-tab", name = "FrontierTab", version = "1.1.0",
+@Plugin(id = "frontier-tab", name = "FrontierTab", version = "1.2.0",
         description = "[Frontier] A tab menu customization plugin with placeholder support.",
         url = "https://github.com/TheFrontier/FrontierTab",
         authors = ["DotDash"],
         dependencies = [
-            Dependency(id = "solace", version = "[2.1.0,)"),
+            Dependency(id = "solace", version = "3.4.0"),
             Dependency(id = "placeholderapi", version = "4.4")
         ])
 class FrontierTab @Inject constructor(

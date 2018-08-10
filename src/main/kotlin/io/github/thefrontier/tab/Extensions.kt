@@ -4,11 +4,11 @@ import me.rojo8399.placeholderapi.PlaceholderService
 import org.spongepowered.api.entity.living.player.Player
 import org.spongepowered.api.service.permission.PermissionService
 import org.spongepowered.api.text.Text
-import pw.dotdash.solace.java.unwrapped
-import pw.dotdash.solace.sponge.Server
-import pw.dotdash.solace.sponge.service.uncheckedService
-import pw.dotdash.solace.sponge.text.fromAmpersand
-import pw.dotdash.solace.sponge.text.text
+import solace.java.util.unwrapped
+import solace.sponge.Server
+import solace.sponge.service.uncheckedService
+import solace.sponge.text.fromAmpersand
+import solace.sponge.text.text
 
 val placeholderService: PlaceholderService by lazy { PlaceholderService::class.uncheckedService }
 val permissionService: PermissionService by lazy { PermissionService::class.uncheckedService }
