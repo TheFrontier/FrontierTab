@@ -59,7 +59,7 @@ fun updateHeadersAndFooters() {
 fun updateTabListEntries() {
     for (player in Server.onlinePlayers) {
         for (target in Server.onlinePlayers) {
-            player.tabList.getEntry(target.uniqueId).unwrapped?.setDisplayName(player.tabFormat ?: target.name.text)
+            player.tabList.getEntry(target.uniqueId).unwrapped?.setDisplayName(target.tabFormat ?: target.name.text)
         }
     }
 }
@@ -68,7 +68,7 @@ fun updateTab() {
     for (player in Server.onlinePlayers) {
         player.updateHeaderAndFooter()
         for (target in Server.onlinePlayers) {
-            player.tabList.getEntry(target.uniqueId).unwrapped?.setDisplayName(player.tabFormat ?: target.name.text)
+            player.tabList.getEntry(target.uniqueId).unwrapped?.setDisplayName(target.tabFormat ?: target.name.text)
         }
     }
 }

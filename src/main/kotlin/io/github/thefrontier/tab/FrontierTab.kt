@@ -28,7 +28,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.util.concurrent.TimeUnit
 
-@Plugin(id = "frontier-tab", name = "FrontierTab", version = "1.2.0",
+@Plugin(id = "frontier-tab", name = "FrontierTab", version = "1.3.0",
         description = "[Frontier] A tab menu customization plugin with placeholder support.",
         url = "https://github.com/TheFrontier/FrontierTab",
         authors = ["DotDash"],
