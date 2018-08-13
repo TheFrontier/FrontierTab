@@ -1,6 +1,6 @@
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.2.50"
-    id "org.jetbrains.kotlin.kapt" version "1.2.50"
+    id "org.jetbrains.kotlin.jvm" version "1.2.60"
+    id "org.jetbrains.kotlin.kapt" version "1.2.60"
 
     id "com.github.johnrengelman.shadow" version "2.0.4"
 
@@ -15,20 +15,18 @@ configurations {
     compile.extendsFrom(shadow)
 }
 
-
 repositories {
     mavenCentral()
     maven { url "https://repo.spongepowered.org/maven/" }
     maven { url 'https://jitpack.io' }
 }
 
-
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.50"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.60"
 
     kapt 'org.spongepowered:spongeapi:7.1.0-SNAPSHOT'
 
-    compile 'com.github.xDotDash:Solace:3.5.0'
+    compile 'com.github.xDotDash:solace:3.6.0'
     compile 'com.github.rojo8399:PlaceholderApi:4.4'
 }
 
@@ -41,6 +39,7 @@ shadowJar {
 }
 
 build.dependsOn(shadowJar)
+signArchives.dependsOn(shadowJar)
 
 compileKotlin {
     kotlinOptions {

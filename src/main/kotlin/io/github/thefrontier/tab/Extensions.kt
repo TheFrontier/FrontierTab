@@ -1,6 +1,7 @@
 package io.github.thefrontier.tab
 
 import me.rojo8399.placeholderapi.PlaceholderService
+import org.spongepowered.api.data.key.Keys
 import org.spongepowered.api.entity.living.player.Player
 import org.spongepowered.api.service.permission.PermissionService
 import org.spongepowered.api.text.Text
@@ -13,14 +14,13 @@ import solace.sponge.text.text
 val placeholderService: PlaceholderService by lazy { PlaceholderService::class.uncheckedService }
 val permissionService: PermissionService by lazy { PermissionService::class.uncheckedService }
 
-val Player.tabFormat: Text?
-    get() {
-        val format = this.getOption("tab-format").unwrapped?.fromAmpersand()
-        if (format != null) {
-            return placeholderService.replaceSourcePlaceholders(format, this)
-        }
-        return null
+fun Player.tabFormat(target: Player): Text? {
+    val format = this.getOption("tab-format").unwrapped?.fromAmpersand()
+    if (format != null) {
+        return placeholderService.replaceSourcePlaceholders(format, target)
     }
+    return null
+}
 
 val Player.tabHeader: Text?
     get() {
@@ -46,7 +46,7 @@ fun Player.updateHeaderAndFooter() {
 
 fun Player.updateTabListEntry() {
     for (player in Server.onlinePlayers) {
-        player.tabList.getEntry(this.uniqueId).unwrapped?.setDisplayName(player.tabFormat ?: this.name.text)
+        player.tabList.getEntry(this.uniqueId).unwrapped?.setDisplayName(this.tabFormat(player) ?: this.name.text)
     }
 }
 
@@ -59,7 +59,10 @@ fun updateHeadersAndFooters() {
 fun updateTabListEntries() {
     for (player in Server.onlinePlayers) {
         for (target in Server.onlinePlayers) {
-            player.tabList.getEntry(target.uniqueId).unwrapped?.setDisplayName(target.tabFormat ?: target.name.text)
+            if (!target.isVanished) {
+                player.tabList.getEntry(target.uniqueId).unwrapped?.setDisplayName(player.tabFormat(target)
+                        ?: target.name.text)
+            }
         }
     }
 }
@@ -68,7 +71,12 @@ fun updateTab() {
     for (player in Server.onlinePlayers) {
         player.updateHeaderAndFooter()
         for (target in Server.onlinePlayers) {
-            player.tabList.getEntry(target.uniqueId).unwrapped?.setDisplayName(target.tabFormat ?: target.name.text)
+            if (!target.isVanished) {
+                player.tabList.getEntry(target.uniqueId).unwrapped?.setDisplayName(player.tabFormat(target)
+                        ?: target.name.text)
+            }
         }
     }
 }
+
+inline val Player.isVanished: Boolean get() = this[Keys.VANISH].orElse(false)
