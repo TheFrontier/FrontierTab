@@ -28,12 +28,12 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.util.concurrent.TimeUnit
 
-@Plugin(id = "frontier-tab", name = "FrontierTab", version = "1.4.0",
+@Plugin(id = "frontier-tab", name = "FrontierTab", version = "1.5.0",
         description = "[Frontier] A tab menu customization plugin with placeholder support.",
         url = "https://github.com/TheFrontier/FrontierTab",
         authors = ["DotDash"],
         dependencies = [
-            Dependency(id = "solace", version = "3.4.0"),
+            Dependency(id = "solace", version = "3.6.0"),
             Dependency(id = "placeholderapi", version = "4.4")
         ])
 class FrontierTab @Inject constructor(
